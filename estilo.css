@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e6f0ff;
+  margin: 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+  color: #003366;
+}
+
+p {
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #003366;
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: 15px;
+  margin-right: 5px;
+  padding: 8px 14px;
+  border: none;
+  background-color: #003366;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #001f4d;
+}
+
+hr {
+  margin: 25px 0;
+}
+
+#listaParticipantes {
+  background: #f8fbff;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.part-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #ccd;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Registro de Participantes - Encuesta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Registro de Participantes</h2>
+    <p>Formulario para registrar los correos que podrán participar en la encuesta.</p>
+
+    <form id="formParticipante">
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" required>
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre">
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido">
+
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" min="0">
+
+      <label for="genero">Género:</label>
+      <select id="genero">
+        <option value="">(Seleccione)</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+      </select>
+
+      <label for="sector">Sector / Región:</label>
+      <input type="text" id="sector">
+
+      <button type="submit">Guardar</button>
+      <button type="button" id="btnLimpiar">Limpiar</button>
+    </form>
+
+    <hr>
+
+    <h3>Participantes Registrados</h3>
+    <div id="listaParticipantes">
+      <!-- lista desde la API -->
+    </div>
+  </div>
+
+  <script src="participantes.js"></script>
+</body>
+</html>
