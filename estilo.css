@@ -84,3 +84,19 @@ hr {
 .opcion-linea {
   margin: 3px 0;
 }
+
+.btn-mail {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 10px;
+  background-color: #0066cc;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.btn-mail:hover {
+  background-color: #004a99;
+}
+
