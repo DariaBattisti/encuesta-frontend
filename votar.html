@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Votación - Encuesta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Votación de la Encuesta</h2>
+    <p>Esta página permite registrar la intención de voto del participante.</p>
+
+    <!--  mostramos mensajes validando, error, etc. -->
+    <div id="estado" style="margin-bottom: 15px; font-weight: bold;"></div>
+
+    <!-- se cargan dinámicamente los cargos y sus candidatos -->
+    <form id="formVoto" style="display:none;">
+      <div id="bloqueVoto"></div>
+
+      <button type="submit">Enviar voto</button>
+    </form>
+  </div>
+
+  <script src="votar.js"></script>
+</body>
+</html>
