@@ -1,5 +1,8 @@
-// url del backend en Render
+// url base del backend en Render
 const API_BASE = "https://encuesta-backend-vjme.onrender.com";
+
+// url base del frontend en GitHub Pages
+const FRONT_BASE = "https://dariabattisti.github.io/encuesta-frontend";
 
 const form = document.getElementById("formParticipante");
 const listaDiv = document.getElementById("listaParticipantes");
@@ -81,18 +84,43 @@ async function cargarParticipantes() {
       return;
     }
 
-    // por cada participante creamos una linea
+    // por cada participante, creamos una linea
     lista.forEach((p) => {
       const fila = document.createElement("div");
       fila.className = "part-item";
 
-      // ejemplo: correo | nombre apellido | sector | ya votó? no/si
+      // texto con datos básicos
       const yaVotoTxt = p.yaVoto == 1 ? "Sí" : "No";
 
-      fila.textContent =
+      const texto = document.createElement("div");
+      texto.textContent =
         `${p.correo} | ${p.nombre || ""} ${p.apellido || ""}` +
         ` | Edad: ${p.edad || "-"} | Género: ${p.genero || "-"} | ` +
         `Sector: ${p.sector || "-"} | Ya votó: ${yaVotoTxt}`;
+
+      fila.appendChild(texto);
+
+      // boton para enviar el mail con el link de votación
+      const linkVoto =
+        `${FRONT_BASE}/votar.html?correo=${encodeURIComponent(p.correo)}`;
+
+      const cuerpo =
+        "Tu enlace de votacion es:\n" + linkVoto;
+
+      const mailto =
+        "mailto:" +
+        encodeURIComponent(p.correo) +
+        "?subject=" +
+        encodeURIComponent("Encuesta - Intencion de voto") +
+        "&body=" +
+        encodeURIComponent(cuerpo);
+
+      const btnMail = document.createElement("a");
+      btnMail.href = mailto;
+      btnMail.textContent = "Enviar enlace";
+      btnMail.className = "btn-mail";
+
+      fila.appendChild(btnMail);
 
       listaDiv.appendChild(fila);
     });
