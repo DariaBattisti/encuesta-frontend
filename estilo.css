@@ -68,3 +68,19 @@ hr {
   border-bottom: 1px solid #ccd;
   font-size: 0.9rem;
 }
+
+.cargo-block {
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #f3f7ff;
+}
+
+.cargo-block h4 {
+  margin: 0 0 8px 0;
+  color: #003366;
+}
+
+.opcion-linea {
+  margin: 3px 0;
+}
