@@ -100,9 +100,8 @@ async function cargarParticipantes() {
 
       fila.appendChild(texto);
 
-      // mensaje informativo (ya no hay boton mailto)
       const info = document.createElement("div");
-      info.textContent = "El enlace de votación se envía automáticamente por correo.";
+      info.textContent = "El enlace de votación enviado por correo.";
       info.className = "info-mail";
 
       fila.appendChild(info);
