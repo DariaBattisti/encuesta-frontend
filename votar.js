@@ -5,7 +5,7 @@ const estadoDiv = document.getElementById("estado");
 const formVoto = document.getElementById("formVoto");
 const bloqueVoto = document.getElementById("bloqueVoto");
 
-// leer correo desde la URL 
+// leer correo desde la URL
 const params = new URLSearchParams(window.location.search);
 const correo = params.get("correo");
 
@@ -17,7 +17,7 @@ if (!correo) {
   validarParticipante();
 }
 
-//validar si el correo está registrado y si puede votar
+// validar si el correo está registrado y si puede votar
 async function validarParticipante() {
   try {
     const resp = await fetch(
@@ -26,17 +26,15 @@ async function validarParticipante() {
     const data = await resp.json();
 
     if (!data.permitido) {
-      //no puede votar: correo no registrado o ya votó
+      // no puede votar: correo no registrado o ya votó
       estadoDiv.textContent = "No puede votar: " + (data.motivo || "motivo desconocido.");
       formVoto.style.display = "none";
       return;
     }
 
-    //puede votar
+    // puede votar
     estadoDiv.textContent = "Correo válido. Complete su intención de voto.";
-    //cargamos los cargos y candidatos
     await cargarCargosYAspirantes();
-    //mostramos el formulario
     formVoto.style.display = "block";
   } catch (err) {
     console.error(err);
@@ -44,7 +42,7 @@ async function validarParticipante() {
   }
 }
 
-//Pedir cargos y aspirantes al backend y construir el formulario
+// Pedir cargos y aspirantes al backend y construir el formulario
 async function cargarCargosYAspirantes() {
   try {
     const resp = await fetch(API_BASE + "/api/cargosConAspirantes");
@@ -67,21 +65,21 @@ async function cargarCargosYAspirantes() {
 
       // cada cargo tendra un grupo de radios
       cargo.aspirantes.forEach((asp) => {
-        const linea = document.createElement("div");
-        linea.className = "opcion-linea";
+        const label = document.createElement("label");
+        label.className = "opcion-linea";
 
         const radio = document.createElement("input");
         radio.type = "radio";
         radio.name = "cargo_" + cargo.idCargo; // grupo por cargo
-        radio.value = asp.id;                  // id del aspirante
+        radio.value = asp.id; // id del aspirante
 
-        const label = document.createElement("label");
-        label.style.marginLeft = "4px";
-        label.textContent = asp.nombre;
+        // texto al lado del radio
+        const span = document.createElement("span");
+        span.textContent = asp.nombre;
 
-        linea.appendChild(radio);
-        linea.appendChild(label);
-        bloque.appendChild(linea);
+        label.appendChild(radio);
+        label.appendChild(span);
+        bloque.appendChild(label);
       });
 
       bloqueVoto.appendChild(bloque);
@@ -92,7 +90,7 @@ async function cargarCargosYAspirantes() {
   }
 }
 
-//Manejar el envio del voto
+// Manejar el envio del voto
 formVoto.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -105,12 +103,11 @@ formVoto.addEventListener("submit", async (e) => {
 
     lista.forEach((cargo) => {
       const nombreGrupo = "cargo_" + cargo.idCargo;
-      const seleccionado = document.querySelector(`input[name="${nombreGrupo}"]:checked`);
+      const seleccionado = document.querySelector(
+        `input[name="${nombreGrupo}"]:checked`
+      );
 
-      if (!seleccionado) {
-        //ignoramos los que no eligieron
-        return;
-      }
+      if (!seleccionado) return;
 
       const idAspirante = parseInt(seleccionado.value, 10);
 
@@ -142,7 +139,7 @@ formVoto.addEventListener("submit", async (e) => {
       estadoDiv.textContent = "No se pudo registrar el voto: " + data.error;
     } else {
       estadoDiv.textContent = data.mensaje || "Voto registrado correctamente.";
-      formVoto.style.display = "none"; // ya no puede volver a votar
+      formVoto.style.display = "none";
     }
   } catch (err) {
     console.error(err);
