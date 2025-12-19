@@ -69,6 +69,13 @@ hr {
   font-size: 0.9rem;
 }
 
+.info-mail {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+  font-style: italic;
+}
+
 .cargo-block {
   margin-bottom: 18px;
   padding: 10px;
@@ -84,19 +91,3 @@ hr {
 .opcion-linea {
   margin: 3px 0;
 }
-
-.btn-mail {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 4px 10px;
-  background-color: #0066cc;
-  color: #ffffff;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  text-decoration: none;
-}
-
-.btn-mail:hover {
-  background-color: #004a99;
-}
-
