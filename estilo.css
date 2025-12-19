@@ -99,3 +99,10 @@ hr {
 .opcion-linea input[type="radio"] {
   margin: 0;
 }
+
+#resultados div {
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+
