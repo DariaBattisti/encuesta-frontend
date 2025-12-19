@@ -48,6 +48,7 @@ form.addEventListener("submit", async (e) => {
     if (data.error) {
       alert("Error: " + data.error);
     } else {
+      alert("Participante registrado. El enlace fue enviado al correo.");
       limpiarFormulario();
       cargarParticipantes(); // recargar lista
     }
@@ -89,7 +90,6 @@ async function cargarParticipantes() {
       const fila = document.createElement("div");
       fila.className = "part-item";
 
-      // texto con datos básicos
       const yaVotoTxt = p.yaVoto == 1 ? "Sí" : "No";
 
       const texto = document.createElement("div");
@@ -100,28 +100,12 @@ async function cargarParticipantes() {
 
       fila.appendChild(texto);
 
-      // boton para enviar el mail con el link de votación
-      const linkVoto =
-        `${FRONT_BASE}/votar.html?correo=${encodeURIComponent(p.correo)}`;
+      // mensaje informativo (ya no hay boton mailto)
+      const info = document.createElement("div");
+      info.textContent = "El enlace de votación se envía automáticamente por correo.";
+      info.className = "info-mail";
 
-      const cuerpo =
-        "Tu enlace de votacion es:\n" + linkVoto;
-
-      const mailto =
-        "mailto:" +
-        encodeURIComponent(p.correo) +
-        "?subject=" +
-        encodeURIComponent("Encuesta - Intencion de voto") +
-        "&body=" +
-        encodeURIComponent(cuerpo);
-
-      const btnMail = document.createElement("a");
-      btnMail.href = mailto;
-      btnMail.textContent = "Enviar enlace";
-      btnMail.className = "btn-mail";
-
-      fila.appendChild(btnMail);
-
+      fila.appendChild(info);
       listaDiv.appendChild(fila);
     });
   } catch (err) {
