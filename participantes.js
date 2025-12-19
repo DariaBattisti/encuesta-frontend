@@ -16,7 +16,11 @@ const inputGenero = document.getElementById("genero");
 const inputSector = document.getElementById("sector");
 
 // cuando la pagina carga pedimos la lista de participantes
-window.addEventListener("DOMContentLoaded", cargarParticipantes);
+window.addEventListener("DOMContentLoaded", () => {
+  cargarParticipantes();
+  cargarResultados();
+});
+
 
 // manejar el envio del formulario
 form.addEventListener("submit", async (e) => {
@@ -112,3 +116,53 @@ async function cargarParticipantes() {
     listaDiv.textContent = "Error al cargar participantes.";
   }
 }
+
+async function cargarResultados() {
+  const div = document.getElementById("resultados");
+  if (!div) {
+    console.log("No existe #resultados en el HTML");
+    return;
+  }
+
+  div.textContent = "Cargando resultados...";
+
+  try {
+    const resp = await fetch(API_BASE + "/api/resultados");
+    const data = await resp.json();
+
+    console.log("Resultados recibidos:", data);
+
+    if (!Array.isArray(data) || data.length === 0) {
+      div.textContent = "No hay resultados disponibles.";
+      return;
+    }
+
+    div.innerHTML = "";
+
+    // agrupar por cargo
+    const porCargo = {};
+    data.forEach((r) => {
+      if (!porCargo[r.cargo]) porCargo[r.cargo] = [];
+      porCargo[r.cargo].push(r);
+    });
+
+    Object.keys(porCargo).forEach((cargo) => {
+      const h4 = document.createElement("h4");
+      h4.textContent = cargo;
+      div.appendChild(h4);
+
+      porCargo[cargo].forEach((r) => {
+        const fila = document.createElement("div");
+        fila.textContent = `${r.aspirante}: ${r.votos} votos`;
+        div.appendChild(fila);
+      });
+
+      div.appendChild(document.createElement("hr"));
+    });
+  } catch (err) {
+    console.error("Error al cargar resultados:", err);
+    div.textContent = "Error al cargar resultados (mira consola F12).";
+  }
+}
+
+
